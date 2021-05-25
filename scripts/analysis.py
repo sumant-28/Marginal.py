@@ -123,6 +123,87 @@ df2 = df2.rename_axis('tags').reset_index()
 df1df2 = pd.concat([df1,df2], ignore_index=False, axis=1)
 df1df2.to_csv('aggregate.csv')
 
+# creation of final plot
 
+SMALL_SIZE = 8
+MEDIUM_SIZE = 10
+BIGGER_SIZE = 12
+
+plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
+plt.rc('axes', titlesize=SMALL_SIZE)     # fontsize of the axes title
+plt.rc('axes', labelsize=SMALL_SIZE)    # fontsize of the x and y labels
+plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
+plt.rc('figure', titlesize=SMALL_SIZE)  # fontsize of the figure title
+
+def addconnection(i,j,c):
+  return [((-1,1),(i-1,j-1),c)]
+
+def drawnodes(s,i):
+  global ax
+  if(i==1):
+    color='r'
+    posx=1
+  else:
+    color='b'
+    posx=-1
+
+  posy=0
+  for n in s:
+    plt.gca().add_patch( plt.Circle((posx,posy),radius=0.05,fc=color))
+    if posx==1:
+      ax.annotate(n,xy=(posx,posy+0.1))
+    else:
+      ax.annotate(n,xy=(posx-len(n)*0.1,posy+0.1))
+    posy+=1
+
+ax=plt.figure().add_subplot(111)
+plt.title('Bipartite Graph of Post Frequency vs Accumulated Comments')
+set1=['Travels','Weblog','Television','Games','Music','Sports','Film','The Arts',
+      'Religion','Travel','Food and Drink','Web/Tech','Science','Philosophy','Books',
+      'Medicine','Data Source','Education','History','Political Science','Law','Current Affairs',
+      'Economics']
+set2=['W', 'Tr','Te','G','Sp','M','F','R','Tr',
+      'TA','F&D','P','M','Sc','DS','W/T',
+      'H','Ed','PS','L','B',
+      'CA','Ec']
+plt.axis([-2,2,-1,max(len(set1),len(set2))+1])
+frame=plt.gca()
+frame.axes.get_xaxis().set_ticks([])
+frame.axes.get_yaxis().set_ticks([])
+
+drawnodes(set1,1)
+drawnodes(set2,2)
+
+connections=[]
+connections+=addconnection(23,23,'g')
+connections+=addconnection(22,22,'g')
+connections+=addconnection(21,15,'g')
+connections+=addconnection(20,21,'g')
+connections+=addconnection(19,20,'g')
+connections+=addconnection(18,18,'g')
+connections+=addconnection(17,19,'g')
+connections+=addconnection(16,12,'g')
+connections+=addconnection(15,17,'g')
+connections+=addconnection(14,13,'g')
+connections+=addconnection(13,16,'g')
+connections+=addconnection(12,14,'g')
+connections+=addconnection(11,11,'g')
+connections+=addconnection(10,8,'g')
+connections+=addconnection(9,10,'g')
+connections+=addconnection(8,9,'g')
+connections+=addconnection(7,7,'g')
+connections+=addconnection(6,5,'g')
+connections+=addconnection(5,6,'g')
+connections+=addconnection(4,4,'g')
+connections+=addconnection(3,3,'g')
+connections+=addconnection(2,1,'g')
+connections+=addconnection(1,2,'g')
+
+for c in connections:
+  plt.plot(c[0],c[1],c[2])
+
+plt.savefig('bipartite.svg')
 
     
