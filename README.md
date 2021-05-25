@@ -48,6 +48,12 @@ high levels of audience engagement. In a single year there might be some deviati
 to be near the top on another. That indicates that the content creators have an understanding of what the audience wants and mostly caters
 to that. There is even less variation when the comparison is made across all years in a separate csv file.
 
+The final graphic displays the same information contained in the aggregate csv file. The biggest discrepancy is that Books are blogged about
+more than their ranked engagement from the audience judged by the comments they accumulate. Per year there is much more variance in where these tags are relative to their paired opposite column. This is consistent with the idea of the law of large numbers taking effect to level
+out the highly variable nature of how many comments each blog post generates.
+
+![](graphics/bipartite.svg)
+
 ### Conclusion 
 
 This project is designed to be extensible to other blog sites with similarly straightforward html structures.
